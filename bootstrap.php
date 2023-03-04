@@ -1,0 +1,15 @@
+<?php
+define('APP_ROOT', dirname(__FILE__, 1));                // Root directory
+require APP_ROOT . '/configs/config.php';                 // Configuration data (NOTE: The path printed in book was wrong, use this path)
+define('so','http://localhost/CSE485_2023_BTTH02');     //same origin
+if (DEV === false) {
+    set_exception_handler('handle_exception');           // Set exception handler
+    set_error_handler('handle_error');                   // Set error handler
+    register_shutdown_function('handle_shutdown');       // Set shutdown handler
+}
+spl_autoload_register(function($class)                   // Set autoload function
+{
+    $path = APP_ROOT . '/models/';                  // Path to class definitions
+    require $path . $class . '.php';                     // Include class definition
+});
+?>

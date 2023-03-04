@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <ul>
-        <li><a href="./index.php">Trang chủ</a></li>
-        <li><a href="./index.php?controller=article&action=list">Bài viết</a></li>
-    </ul>
-    <h1>Tôi là TRANG CHỦ</h1>
-    <?php
-        foreach($articles as $article){
-            echo "<p>{$article->getTitle()}</p>";
-        }
-    ?>
-</body>
-</html>
+<?php
+    declare(strict_types=1);                                 // Use strict types
+    include_once(realpath(dirname(__FILE__) . '/../../bootstrap.php'));
+?>
+<?php include APP_ROOT . '/includes/header.php'?>
+    <main>
+        <?php include  APP_ROOT . '\includes\slideShow.php'?>
+        <?php include  APP_ROOT . '\views\article\list_article.php'?>
+    </main>
+<?php include APP_ROOT . '/includes/footer.php'?>

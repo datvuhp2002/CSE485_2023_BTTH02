@@ -33,7 +33,10 @@
         }   
         public function updateArticle($id) {
             $stmt = $this->db->query('SELECT * FROM baiviet where ma_bviet = ' . $id);
-
+        }
+        public function deleteArticle($id) {
+            $stmt = $this->db->query('DELETE FROM baiviet WHERE ma_bviet =' . $id);
+            $stmt->execute();
         }
         public function getAllCategories() {
             $stmt = $this->db->query('SELECT * FROM theloai');

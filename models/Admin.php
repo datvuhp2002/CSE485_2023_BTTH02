@@ -33,11 +33,17 @@
         }   
         public function updateArticle($id) {
             $stmt = $this->db->query('SELECT * FROM baiviet where ma_bviet = ' . $id);
-
+        }
+        public function deleteArticle($id) {
+            $stmt = $this->db->query('DELETE FROM baiviet WHERE ma_bviet =' . $id);
+            $stmt->execute();
         }
         public function getAllCategories() {
             $stmt = $this->db->query('SELECT * FROM theloai');
-            $this->categories = $stmt->fetchAll(PDO::FETCH_CLASS, 'Category');
+            while($row = $stmt->fetch()){
+                $category = new Category($row['ma_tloai'],$row['ten_tloai']);
+                array_push($this->categories,$category);
+            }
             return $this->categories;
         }
         
@@ -47,7 +53,10 @@
     
         public function getAllAuthors() {
             $stmt = $this->db->query('SELECT * FROM tacgia');
-            $this->authors = $stmt->fetchAll(PDO::FETCH_CLASS, 'Author');
+            while($row = $stmt->fetch()){
+                $author = new Author($row['ma_tgia'],$row['ten_tgia'],$row['hinh_tgia']);
+                array_push($this->authors,$author);
+            }
             return $this->authors;
         }
         public function setAuthors($authors) {

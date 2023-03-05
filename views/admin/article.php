@@ -6,7 +6,7 @@
 <main class="container mt-5 mb-5">
         <div class="row">
             <div class="col-sm">
-                <a href="index.php?controller=article&action=add" class="btn btn-success">Thêm mới</a>
+                <a href="index.php?controller=admin&action=addArticle" class="btn btn-success">Thêm mới</a>
                 <table class="table" >
                     <thead>
                         <tr>
@@ -36,10 +36,10 @@
                                 <td ><?= $article->getNgayViet()?></td>
                                 <td style="white-space: wrap"><?= $article->getHinhAnh()?></td>
                                 <td >
-                                    <a href=<?=so."/index.php?controller=admin&action=edit&id=".$article->getMaBviet()?>><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href=<?=so."/index.php?controller=admin&action=editArticle&id=".$article->getMaBviet()?>><i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                                 <td >
-                                    <a href = <?=so."/index.php?controller=admin&action=delete&id=".$article->getMaBviet()?>><i class="fa-solid fa-trash"></i></a>
+                                    <a href = <?=so."/index.php?controller=admin&action=deleteArticle&id=".$article->getMaBviet()?>><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -1,23 +1,21 @@
 <?php
 include("configs/DBConnection.php");
-include("models/Article.php");
+include("models/Category.php");
 class CategoryService {
-     private $db =new DBConnection();
+     private $dbConn =new DBConnection();
+     private $db=dbConn->getConnection();
      
-     public function __construct1(){ }
-     public function __construct2($db){
-         $this->db =$db;
-     }
+     public function __construct1(){}
      
-
      public function  getAllcategory(){
          $query = "SELECT * FROM `theloai`";
          $result = $this->db->query($query);
-         $categories = [];
+         $categories = array();
          while($row = $result->fetch(PDO::FETCH_ASSOC)){
              $category = new Category($row['ma_tloai'],$row['ten_tloai']);
              $categories[] = $category;
          }
+         return $categories;
      }
  
      public function getCategoryById($id){
@@ -27,7 +25,7 @@ class CategoryService {
          $row = $result->fetch(PDO::FETCH_ASSOC);
          
          $categories = new Category($row['ma_tloai'],$row['ten_tloai']) ;
- 
+         return $categories;
      }
 
      public function createCategory($ma_tloai,$ten_tloai){

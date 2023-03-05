@@ -8,8 +8,6 @@ class Author{
         $this->tenTgia = $tenTgia;
         $this->hinhAnh = $hinhAnh;
     }
-
-
     // Setters
     public function setTenTgia($tenTgia) {
         $this->tenTgia = $tenTgia;
@@ -17,7 +15,6 @@ class Author{
     public function setHinhAnh($hinhAnh) {
         $this->hinhAnh = $hinhAnh;
     }
-
     // Getters
     public function getMaTgia() {
         return $this->maTgia;

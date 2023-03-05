@@ -44,7 +44,7 @@ class Article{
     }
 
     // Getters
-    public function getMaBViet() {
+    public function getMaBviet() {
         return $this->maBviet;
     }
     public function getTieuDe() {

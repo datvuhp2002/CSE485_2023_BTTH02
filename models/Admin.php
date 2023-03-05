@@ -1,5 +1,8 @@
 <?php 
     include 'Article.php';
+    include 'Category.php';
+    include 'Author.php';
+
     class Admin {
         private $articles = [];
         private $categories = [];
@@ -32,25 +35,25 @@
             $stmt = $this->db->query('SELECT * FROM baiviet where ma_bviet = ' . $id);
 
         }
-        public function getCategories() {
-            $stmt = $this->db->query('SELECT * FROM categories');
+        public function getAllCategories() {
+            $stmt = $this->db->query('SELECT * FROM theloai');
             $this->categories = $stmt->fetchAll(PDO::FETCH_CLASS, 'Category');
             return $this->categories;
         }
-    
+        
         public function setCategories($categories) {
             $this->categories = $categories;
         }
     
-        public function getAuthors() {
-            $stmt = $this->db->query('SELECT * FROM authors');
+        public function getAllAuthors() {
+            $stmt = $this->db->query('SELECT * FROM tacgia');
             $this->authors = $stmt->fetchAll(PDO::FETCH_CLASS, 'Author');
             return $this->authors;
         }
         public function setAuthors($authors) {
             $this->authors = $authors;
         }
-        public function getUsers() {
+        public function getAllUsers() {
             $stmt = $this->db->query('SELECT * FROM users');
             $this->users = $stmt->fetchAll(PDO::FETCH_CLASS, 'User');
             return $this->users;

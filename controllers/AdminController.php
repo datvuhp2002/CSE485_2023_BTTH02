@@ -21,6 +21,8 @@ class AdminController{
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
         $article = $admin->getArticle($_GET['id']);
+        $categories = $admin->getAllCategories();
+        $authors = $admin->getAllAuthors();
         include("views/admin/editArticle.php");
     }
     public function delete(){

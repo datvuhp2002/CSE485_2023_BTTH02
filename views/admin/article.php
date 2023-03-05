@@ -25,9 +25,8 @@
                     </thead>
                     <tbody>
                         <?php foreach($articles as $article) {?>
-
                             <tr >
-                                <th name = "id" scope="row"><?= $article->getMaBViet()?></th>
+                                <th name = "id" scope="row"><?= $article->getMaBviet()?></th>
                                 <td ><?= $article->getTieuDe()?></td>
                                 <td ><?= $article->getTenBHat() ?></td>
                                 <td class="text-center" ><?= $article->getMaTloai()?></td>
@@ -37,10 +36,10 @@
                                 <td ><?= $article->getNgayViet()?></td>
                                 <td style="white-space: wrap"><?= $article->getHinhAnh()?></td>
                                 <td >
-                                    <a href=<?=so."/index.php?controller=admin&action=edit&id=".$article->getMaBViet()?>><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href=<?=so."/index.php?controller=admin&action=edit&id=".$article->getMaBviet()?>><i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                                 <td >
-                                    <a href = <?=so."/index.php?controller=admin&action=delete&id=".$article->getMaBViet()?>><i class="fa-solid fa-trash"></i></a>
+                                    <a href = <?=so."/index.php?controller=admin&action=delete&id=".$article->getMaBviet()?>><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php } ?>

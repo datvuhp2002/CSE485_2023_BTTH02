@@ -11,13 +11,14 @@ class AdminController{
         $articles = $admin->getAllArticles();
         include("views/admin/article.php");
     }
-    public function add(){
+    public function addArticle(){
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
+        $categories = $admin->getAllCategories();
+        $authors = $admin->getAllAuthors();
         include("views/admin/addArticle.php");
-
     }
-    public function edit(){
+    public function editArticle(){
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
         $article = $admin->getArticle($_GET['id']);
@@ -25,10 +26,10 @@ class AdminController{
         $authors = $admin->getAllAuthors();
         include("views/admin/editArticle.php");
     }
-    public function delete(){
+    public function deleteArticle(){
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
-        $article = $admin->getArticle($_GET['id']);
+        $admin->deleteArticle($_GET['id']);
         include("views/admin/deleteArticle.php");
     }
 }

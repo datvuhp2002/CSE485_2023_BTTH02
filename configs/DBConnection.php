@@ -1,8 +1,6 @@
 <?php
-
 class DBConnection{
     private $conn=null;
-
     public function __construct(){
          // B1. Kết nối DB Server
          try {
@@ -11,10 +9,8 @@ class DBConnection{
             echo $e->getMessage();
         }
     }
-
     public function getConnection(){
         return $this->conn;
     }
-
-
 }
+?>

@@ -1,5 +1,5 @@
 <?php
-include("../services/CategoryService.php");
+include("services/CategoryService.php");
 class ArticleController{
     // Hàm xử lý hành động index
     public function index(){
@@ -19,10 +19,10 @@ class ArticleController{
     public function list(){
         // Nhiệm vụ 1: Tương tác với Services/Models
         $categoryService = new CategoryService();
-        $categories[] = $categoryService->getAllcategory();
+        $categories = $categoryService->getAllcategory();
         // echo "Tương tác với Services/Models from category";
         // Nhiệm vụ 2: Tương tác với View
-        include("views/admin/category.php");
+        include("");
     }
 }
 ?>

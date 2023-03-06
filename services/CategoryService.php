@@ -10,10 +10,10 @@ class CategoryService {
      public function  getAllcategory(){
          $query = "SELECT * FROM `theloai`";
          $result = $this->db->query($query);
-         $categories = array();
-         while($row = $result->fetch(PDO::FETCH_ASSOC)){
+         $categories = [];
+         while($row = $result->fetch()){
              $category = new Category($row['ma_tloai'],$row['ten_tloai']);
-             $categories[] = $category;
+             array_push($categories,$category);
          }
          return $categories;
      }

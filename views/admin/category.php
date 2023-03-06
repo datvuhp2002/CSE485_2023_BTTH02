@@ -7,7 +7,7 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_category.php" class="btn btn-success">Thêm mới</a>
+                <a href="index.php?controller=admin&action=addCategory" class="btn btn-success">Thêm mới</a>
                 
                 <table class="table">
                     <thead>
@@ -21,20 +21,18 @@
                     <?php foreach($categories as $category) { ?>
                     <tbody>
                         <tr>
-                            <th scope="row"> <?=html_escape($category->getma_tloai())?> </th>
-                            <td><?=html_escape($category['ten_tloai'])?></td>
+                            <th scope="row"> <?=$category->getId()?> </th>
+                            <td><?=$category->getName()?></td>
                             <td>
-                                <a href="edit_category.php?id=<?=$category['ma_tloai']?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="index.php?controller=admin&action=editCategory&id=<?=$category->getId()?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a href="process_delete_category.php?id=<?=$category['ma_tloai']?>"><i class="fa-solid fa-trash"></i></a>
+                                <a href="index.php?controller=admin&action=deleteCategory&id=<?=$category->getId()?>"><i class="fa-solid fa-trash"></i></a>
                             </td>
-                        </tr>
-                        
-                    </tbody> <?php }?>
+                        </tr>             
+                    </tbody> 
+                    <?php }  ?>
                 </table> 
             </div>
         </div>
     </main>
-
-

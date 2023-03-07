@@ -1,5 +1,6 @@
 <?php
-include("configs/DBConnection.php");
+    
+require_once("configs/DBConnection.php");
 include("models/Login.php");
 class LoginService{
     public function verifyLogin() {
@@ -11,7 +12,6 @@ class LoginService{
         $Password = $_POST['password'];
         $sql = "SELECT * FROM users Where UserName = '$UserName' AND Password = '$Password'";
         $stmt = $conn->query($sql);
- 
         if ($stmt->rowCount()) {
             session_start();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);

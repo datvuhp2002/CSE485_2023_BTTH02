@@ -1,5 +1,6 @@
 <?php
 include("services/LoginService.php");
+include("services/ArticleService.php");
 class LoginController{
     
     //Login    
@@ -14,6 +15,8 @@ class LoginController{
         if($verifyLoginRes === 1){
             include("views/admin/index.php");
         }else if($verifyLoginRes === 0){
+            $articelService = new ArticleService();
+            $articles = $articelService->getAllArticles();
             include("views/home/index.php");
         }else{
             $msg="Tai khoan hoac mat khau khong dung";

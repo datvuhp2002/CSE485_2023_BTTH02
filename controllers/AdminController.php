@@ -71,5 +71,43 @@ class AdminController{
         include("views/admin/deleteCategory.php");
    }
     
+   //Author
+   
+   public function author(){
+    $adminService = new AdminService();
+    $admin = $adminService->getAdminData();
+    $authors = $admin->getAllAuthors();
+    include("views/admin/author.php");
+}
+public function addAuthor(){
+    include("views/admin/addAuthor.php");
+    $adminService = new AdminService();
+    $admin = $adminService->getAdminData();
+    if(isset($_POST['txtten_tgia'])){
+        $authors = $admin->createAuthor($_POST['txtten_tgia'],$_POST['hinh_tgia']);
+    }
+}
+public function editAuthor(){
+    
+    $adminService = new AdminService();
+    $admin = $adminService->getAdminData();
+    $authors = $admin->getAuthorById($_GET['id']);
+    if(isset($_POST['txtten_tgia'])){
+        $edit=$admin->editAuthor($_POST['txtten_tgia'],$_POST['hinh_tgia'],$_GET['id']);
+    }
+    include("views/admin/editAuthor.php");
+}
+public function deleteAuthor(){
+    $adminService = new AdminService();
+    $admin = $adminService->getAdminData();
+    $deletedRows = $admin->deleteAuthor($_GET['id']);
+    if ($deletedRows > 0) {
+        header("Location: danh-sach-danh-muc.php"); // Chuyển hướng đến trang danh sách danh mục
+        exit(); // Ngăn chặn các lệnh tiếp theo được thực thi
+    } else {
+        echo "<script>alert('Xóa danh mục không thành công.');</script>";
+    }
+    include("views/admin/deleteAuthor.php");
+}
 }
 ?>

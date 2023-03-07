@@ -8,19 +8,21 @@ class AuthorController{
         // Nhiệm vụ 2: Tương tác với View
         echo "Tương tác với View from Author";
     }
-    public function add(){
+    public function add($ma_tgia,$ten_tgia,$hinh_tgia){
         // Nhiệm vụ 1: Tương tác với Services/Models
+        $authorService = new AuthorService();
+        $authors = $authorService->createAuthor($ma_tgia,$ten_tgia,$hinh_tgia);
         // echo "Tương tác với Services/Models from Author";
         // Nhiệm vụ 2: Tương tác với View
-        include("views/author/add_author.php");
+        include("");
     }
     public function list(){
         // Nhiệm vụ 1: Tương tác với Services/Models
-        $articelService = new ArticleService();
-        $articles = $articelService->getAllArticles();
+        $authorService = new AuthorService();
+        $authors = $authorService->getAllAuthors();
         // echo "Tương tác với Services/Models from Article";
         // Nhiệm vụ 2: Tương tác với View
-        include("views/article/list_article.php");
+        include("");
     }
 }
 ?>

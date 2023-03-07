@@ -91,16 +91,37 @@
             }
             return $this->authors;
         }
+        public function getAuthorById($id){
+            $query = "SELECT * FROM `tacgia` WHERE `ma_tgia`=:id ";
+            $result = $this->db->prepare($query);
+            $result->execute([':id'=>$id]);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $authors=[];
+            $author = new Author($row['ma_tgia'],$row['ten_tgia'],$row['hinh_tgia']) ;
+            array_push($authors,$author);
+            return $authors;
+        }
+        public function deleteAuthor($id){
+            $query = "DELETE FROM `tacgia` WHERE `ma_tgia` = :id  ";
+            $result = $this->db->prepare($query);
+            $result->execute([':id'=>$id]);
+            return $result->rowCount();
+         }
+         public function createAuthor($ten_tgia,$hinh_tgia){
+            $query = "INSERT INTO `tacgia`( `ten_tgia`,`hinh_tgia`) VALUES (:ten_tgia, :hinh_tgia)";
+            $result = $this->db->prepare($query);
+            $result->execute([':ten_tgia'=>$ten_tgia,':hinh_tgia'=>$hinh_tgia]);
+            return $result->rowCount();
+            
+         }
+         public function editAuthor($ten_tgia,$hinh_tgia,$id){
+            $query = "UPDATE tacgia SET ten_tgia = :ten_tgia, hinh_tgia = :hinh_tgia WHERE ma_tgia = :id";
+            $result = $this->db->prepare($query);
+            $result->execute([':ten_tgia'=>$ten_tgia,':hinh_tgia'=>$hinh_tgia,':id'=>$id]);
+            return $result->rowCount();
+         }
         public function setAuthors($authors) {
             $this->authors = $authors;
-        }
-        public function getAllUsers() {
-            $stmt = $this->db->query('SELECT * FROM users');
-            $this->users = $stmt->fetchAll(PDO::FETCH_CLASS, 'User');
-            return $this->users;
-        }
-        public function setUsers($users) {
-            $this->users = $users;
         }
     }
 ?>

@@ -2,18 +2,12 @@
 include("services/LoginService.php");
 class LoginController{
     
+    //Login    
     public function renderLogin(){
         $msg="";
         include("views/login/login.php");
     }
 
-    public function renderSignup(){
-        $msg="";
-        $msg2="";
-        include("views/login/signup.php");
-    }
-
-    
     public function verifyLogin(){
         $verifyLogin = new LoginService();
         $verifyLoginRes = $verifyLogin->verifyLogin();
@@ -27,7 +21,12 @@ class LoginController{
         }
     }
 
-
+    //Signup
+    public function renderSignup(){
+        $msg="";
+        $msg2="";
+        include("views/login/signup.php");
+    }
     public function verifySignup(){
         $verifySignup = new LoginService();
         $verifySignupRes = $verifySignup->verifySignup();  

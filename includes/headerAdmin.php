@@ -31,7 +31,7 @@
                         <a class="nav-link" href="index.php?controller=admin&action=category">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
+                        <a class="nav-link" href="index.php?controller=admin&action=author">Tác giả</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?controller=admin&action=article">Bài viết</a>

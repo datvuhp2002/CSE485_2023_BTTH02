@@ -43,5 +43,14 @@ class LoginController{
 
 
     }
+    //Log out
+    public function logout(){
+        session_start();
+        if(isset($_SESSION['username'])  ){
+            unset($_SESSION['username']);
+            include("views/home/index.php");
+        }
+    }
+
 }
 ?>

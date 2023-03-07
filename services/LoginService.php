@@ -13,6 +13,7 @@ class LoginService{
         $stmt = $conn->query($sql);
  
         if ($stmt->rowCount()) {
+            session_start();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $_SESSION['username'] = $UserName;
             $row['Role'] != 'admin' ? $res=0 :$res=1;

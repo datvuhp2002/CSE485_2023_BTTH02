@@ -39,7 +39,7 @@
                          <div class= "p-2 "><?="Xin chào ".$_SESSION['username']?></div>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li class ="p-1 fs-6 list-group-item-action list-group-item-primary"><a class="nav-link" href="./logout.php">Đăng xuất</a></li>
+                      <li class ="p-1 fs-6 list-group-item-action list-group-item-primary"><a class="nav-link" href="index.php?controller=login&action=logout">Đăng xuất</a></li>
                     </ul>
                 </div>
 			    </div>

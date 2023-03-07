@@ -33,21 +33,62 @@
         }   
         public function updateArticle($id) {
             $stmt = $this->db->query('SELECT * FROM baiviet where ma_bviet = ' . $id);
-
         }
+        public function deleteArticle($id) {
+            $stmt = $this->db->query('DELETE FROM baiviet WHERE ma_bviet =' . $id);
+            $stmt->execute();
+        }
+
+        //==========================CATEGORY=====================================
         public function getAllCategories() {
             $stmt = $this->db->query('SELECT * FROM theloai');
-            $this->categories = $stmt->fetchAll(PDO::FETCH_CLASS, 'Category');
+            while($row = $stmt->fetch()){
+                $category = new Category($row['ma_tloai'],$row['ten_tloai']);
+                array_push($this->categories,$category);
+            }
             return $this->categories;
         }
-        
+        public function getCategoryById($id){
+            $query = "SELECT * FROM `theloai` WHERE `ma_tloai`=:id ";
+            $result = $this->db->prepare($query);
+            $result->execute([':id'=>$id]);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $categories=[];
+            $category = new Category($row['ma_tloai'],$row['ten_tloai']) ;
+            array_push($categories,$category);
+            return $categories;
+        }
+        public function deleteCategory($id){
+            $query = "DELETE FROM `theloai` WHERE `ma_tloai` = :id  ";
+            $result = $this->db->prepare($query);
+            $result->execute([':id'=>$id]);
+            return $result->rowCount();
+         }
+         public function createCategory($ten_tloai){
+            $query = "INSERT INTO `theloai`( `ten_tloai`) VALUES (:ten_tloai)";
+            $result = $this->db->prepare($query);
+            $result->execute([':ten_tloai'=>$ten_tloai]);
+            return $result->rowCount();
+            
+         }
+         public function editCategory($ten_tloai,$id){
+            $query = "UPDATE `theloai` SET `ten_tloai`=:ten_tloai WHERE `ma_tloai`= :id";
+            $result = $this->db->prepare($query);
+            $result->execute([':ten_tloai'=>$ten_tloai,':id'=>$id]);
+            return $result->rowCount();
+         }
         public function setCategories($categories) {
             $this->categories = $categories;
         }
-    
+        //=============================================================================================
+
+
         public function getAllAuthors() {
             $stmt = $this->db->query('SELECT * FROM tacgia');
-            $this->authors = $stmt->fetchAll(PDO::FETCH_CLASS, 'Author');
+            while($row = $stmt->fetch()){
+                $author = new Author($row['ma_tgia'],$row['ten_tgia'],$row['hinh_tgia']);
+                array_push($this->authors,$author);
+            }
             return $this->authors;
         }
         public function setAuthors($authors) {

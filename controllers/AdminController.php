@@ -9,6 +9,7 @@ class AdminController{
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
         $articles = $admin->getAllArticles();
+        var_dump($articles);
         include("views/admin/article.php");
     }
     public function addArticle(){

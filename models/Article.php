@@ -9,7 +9,7 @@ class Article{
     private $maTgia;
     private $ngayViet;
     private $hinhAnh;
-    public function __construct($maBviet,$tieuDe, $tenBhat,$maTloai,$tomTat,$noiDung,$maTgia,$ngayViet,$hinhAnh){
+    public function __construct($maBviet, $tieuDe, $tenBhat,$maTloai,$tomTat,$noiDung,$maTgia,$ngayViet,$hinhAnh){
         $this->maBviet = $maBviet;
         $this->tieuDe = $tieuDe;
         $this->tenBhat = $tenBhat;

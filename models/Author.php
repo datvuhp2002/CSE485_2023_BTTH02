@@ -9,7 +9,6 @@ class Author{
         $this->hinh_tgia = $hinh_tgia;
     }
     // Setters
-
     public function setId($ma_tgia){ //set ma_tloai
         $this->ma_tgia=$ma_tgia;
    }

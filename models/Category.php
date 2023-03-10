@@ -7,11 +7,9 @@
          $this->ma_tloai = $ma_tloai;
          $this->ten_tloai = $ten_tloai;
      }
-     
      public function setId($ma_tloai){ //set ma_tloai
          $this->ma_tloai=$ma_tloai;
     }
-
     public function setName($ten_tloai){//set ten_tloai
          $this->ten_tloai=$ten_tloai;
     }

@@ -10,18 +10,18 @@
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin tác giả</h3>
                 <form action="index.php?controller=admin&action=editAuthor&id=<?=$_GET['id']?>" method="post">
                     <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatId">Mã tác giả</span>
-                        <input type="text" class="form-control" name="txtma_tgia" readonly value="<?= $_GET['id']?>" >
+                        <span  style="min-width: 105px;" class="input-group-text" id="lblCatId">Mã tác giả</span>
+                        <input  type="text" class="form-control" name="txtma_tgia" readonly value="<?= $_GET['id']?>" >
                     </div>
 
                     <?php foreach($authors as $author ) {?>  
                     <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatId">Tên tác giả</span>
-                        <input type="text" class="form-control" name="txtten_tgia" value = "<?= $author->getTenTgia() ?>">
+                        <span  style="min-width: 105px;" class="input-group-text" id="lblCatId">Tên tác giả</span>
+                        <input  type="text" class="form-control" name="txtten_tgia" value = "<?= $author->getTenTgia() ?>">
                     </div>
                     <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatId">Hình ảnh</span>
-                        <input type="text" class="form-control" name="txthinh_tgia" value = "<?= $author->getHinhAnh() ?>">
+                        <span  style="min-width: 105px;" class="input-group-text" id="lblCatId">Hình ảnh</span>
+                        <input  type="text" class="form-control" name="txthinh_tgia" value = "<?= $author->getHinhAnh() ?>">
                     </div>
               <?php } ?>
 

@@ -50,12 +50,20 @@ class AdminController{
         include("views/admin/category.php");
     }
     public function addCategory(){
-        include("views/admin/addCategory.php");
+        
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
         if(isset($_POST['txt_ten_tloai'])){
-            $admin->createCategory($_POST['txt_ten_tloai']);
+            $categories = $admin->createCategory($_POST['txt_ten_tloai']);
+            if($categories){
+                header("Location:?controller=admin&action=category"); 
+                exit();
+            }else {
+                echo "<script>alert('thêm danh mục không thành công.');</script>";
+            }
         }
+        include("views/admin/addCategory.php");
+        
     }
     public function editCategory(){
         $adminService = new AdminService();
@@ -115,5 +123,52 @@ public function deleteAuthor(){
     }
     include("views/admin/deleteAuthor.php");
 }
+
+//user
+public function user(){
+    $adminService = new AdminService();
+    $admin = $adminService->getAdminData();
+    $users = $admin->getAllUser();
+    include("views/admin/user.php");
+}
+public function addUser(){
+    
+    $adminService = new AdminService();
+    $admin = $adminService->getAdminData();
+    if(isset($_POST['txt_Username'])&&isset($_POST['txt_Password'])&&isset($_POST['txt_Role'])){
+        $users = $admin->createUser($_POST['txt_Username'],$_POST['txt_Password'],$_POST['txt_Role']);
+        if($users>0){
+            header("Location:?controller=admin&action=user"); 
+            exit();
+        }else {
+            echo "<script>alert('thêm user không thành công.');</script>";
+        }
+    }
+    include("views/admin/addUser.php");
+    
+}
+public function editUser(){
+    $adminService = new AdminService();
+    $admin = $adminService->getAdminData();
+    $users = $admin->getUserbyId($_GET['id']);
+    if( isset($_POST['txt_Username'])&&isset($_POST['txt_Password'])&&isset($_POST['txt_Role']) )
+    {
+        $admin->editUser($_POST['txt_Username'],$_POST['txt_Password'],$_POST['txt_Role'],$_GET['id']);
+    }
+    include("views/admin/editUser.php");
+}
+public function deleteUser(){
+    $adminService = new AdminService();
+    $admin = $adminService->getAdminData();
+    $deletedRows = $admin->deleteUser($_GET['id']);
+    if ($deletedRows > 0) {
+        header("Location:?controller=admin&action=user"); 
+        exit(); // Ngăn chặn các lệnh tiếp theo được thực thi
+    } else {
+        echo "<script>alert('Xóa danh mục không thành công.');</script>";
+    }
+    include("views/admin/deleteCategory.php");
+}
+
 }
 ?>

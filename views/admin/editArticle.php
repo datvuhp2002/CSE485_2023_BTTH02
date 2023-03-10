@@ -8,18 +8,18 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
-                <form action="" method="post">
+                <form method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatId">Mã bài viết</span>
                         <input type="text" class="form-control" name="txtma_bviet" readonly value='<?= $article[0]->getMaBviet()?>' >
                     </div>
                     <div class="input-group mt-3 mb-3" >
                         <span class="input-group-text" style="min-width: 105px;">Tên bài hát</span>
-                        <input type="text" class="form-control" name="txtten_bhat"value='<?= $article[0]->getTenBHat()?>' >
+                        <input type="text" class="form-control" name="txtten_bhat"value='<?= $article[0]->getTenBHat()?>' required >
                     </div> 
                     <div class="input-group mt-3 mb-3" >
                         <span class="input-group-text" style="min-width: 105px;">Tiêu đề</span>
-                        <input type="text" class="form-control" name="txttieude"value='<?= $article[0]->getTieuDe() ?>' >
+                        <input type="text" class="form-control" name="txttieude"value='<?= $article[0]->getTieuDe() ?>' required>
                     </div> 
                     <div class="input-group mt-3 mb-3" >
                         <span class="input-group-text" style="min-width: 105px;">Tóm tắt</span>
@@ -41,8 +41,8 @@
                         <span class="input-group-text" style="min-width: 105px;">Thể loại</span>
                         <select name="txtma_tloai" id="category">
                             <?php foreach($categories as $category) { ?>
-                                <option value="<?= $category->getMaTloai(); ?>" <?php if ($category->getTenTloai() == $article[0]->getTenTloai()) { echo 'selected'; } ?>>
-                                    <?= $category->getMaTloai() . ' - ' . $category->getTenTloai(); ?>
+                                <option value="<?= $category->getId(); ?>" <?php if ($category->getId() == $categorySelected->getId()) { echo 'selected'; } ?>>
+                                    <?= $category->getId() . ' - ' . $category->getName(); ?>
                                 </option>
                             <?php }?>
                         </select>
@@ -51,15 +51,15 @@
                         <span class="input-group-text" style="min-width: 105px;">Tác giả</span>
                         <select name="txtma_tgia" id="author">
                             <?php foreach($authors as $author) { ?>
-                                <option value="<?= $author->getMaTgia(); ?>" <?php if ($author->getMaTgia() == $article[0]->getMaTgia()) { echo 'selected'; } ?>>
-                                    <?= $author->getMaTgia() . ' - ' . $author->getTenTgia(); ?>
+                                <option value="<?= $author->getId(); ?>" <?php if ($author->getId() == $authorSelected->getId()) { echo 'selected'; } ?>>
+                                    <?= $author->getId() . ' - ' . $author->getTenTgia(); ?>
                                 </option>
                             <?php }?>   
                         </select>
                     </div>
                     <div class="form-group  float-end">
                         <input type="submit" value="Lưu lại" class="btn btn-success">
-                        <a href="article.php" class="btn btn-warning ">Quay lại</a>
+                        <a href=<?= so . "?controller=admin&action=article"?> class="btn btn-warning ">Quay lại</a>
                     </div>
                 </form>
             </div>

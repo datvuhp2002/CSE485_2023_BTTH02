@@ -12,6 +12,16 @@
         public function __construct(PDO $db) {
             $this->db = $db;
         }
+        // Article
+        public function getArticles(){
+            return $this->articles;
+        }
+        public function getCategories(){
+            return $this->categories;
+        }
+        public function getAuthors(){
+            return $this->authors;
+        }
         public function getAllArticles() {
             $stmt = $this->db->query('SELECT * FROM baiviet');
             while($row = $stmt->fetch()){
@@ -31,15 +41,34 @@
         public function setArticles($articles) {
             $this->articles = $articles;
         }   
-        public function updateArticle($id) {
-            $stmt = $this->db->query('SELECT * FROM baiviet where ma_bviet = ' . $id);
+        
+        public function addArticle($ten_bhat, $tieude, $tomtat, $noidung, $hinhanh, $theloai, $tacgia) {
+            $sql = "INSERT INTO baiviet(tieude, ten_bhat, ma_tloai, tomtat, noidung, ma_tgia, hinhanh) VALUES (:tieude, :ten_bhat, :ma_tloai, :tomtat, :noidung, :ma_tgia, :hinhanh)";
+            $query = $this->db->prepare($sql);
+            $query->execute([
+                ':tieude' => $tieude,
+                ':ten_bhat' => $ten_bhat,
+                ':ma_tloai' => $theloai,
+                ':tomtat' => $tomtat,
+                ':noidung' => $noidung,
+                ':ma_tgia' => $tacgia,
+                ':hinhanh' => $hinhanh
+            ]);
         }
+        
         public function deleteArticle($id) {
             $stmt = $this->db->query('DELETE FROM baiviet WHERE ma_bviet =' . $id);
             $stmt->execute();
         }
-
-        //==========================CATEGORY=====================================
+        // Category
+        public function getCategoryByArticleId($id){
+            $query = "SELECT theloai.ma_tloai ,theloai.ten_tloai FROM theloai, baiviet where baiviet.ma_bviet = :id and baiviet.ma_tloai = theloai.ma_tloai";
+            $result = $this->db->prepare($query);
+            $result->execute([':id'=>$id]);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $category = new Category($row['ma_tloai'],$row['ten_tloai']) ;
+            return $category ;
+        }
         public function getAllCategories() {
             $stmt = $this->db->query('SELECT * FROM theloai');
             while($row = $stmt->fetch()){
@@ -68,8 +97,6 @@
             $query = "INSERT INTO `theloai`( `ten_tloai`) VALUES (:ten_tloai)";
             $result = $this->db->prepare($query);
             $result->execute([':ten_tloai'=>$ten_tloai]);
-            return $result->rowCount();
-            
          }
          public function editCategory($ten_tloai,$id){
             $query = "UPDATE `theloai` SET `ten_tloai`=:ten_tloai WHERE `ma_tloai`= :id";
@@ -80,9 +107,15 @@
         public function setCategories($categories) {
             $this->categories = $categories;
         }
-        //=============================================================================================
-
-
+        // Author
+        public function getAuthorByArticleId($id){
+            $query = "SELECT tacgia.ma_tgia ,tacgia.ten_tgia,tacgia.hinh_tgia FROM tacgia, baiviet where baiviet.ma_bviet = :id and baiviet.ma_tgia = tacgia.ma_tgia";
+            $result = $this->db->prepare($query);
+            $result->execute([':id'=>$id]);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $author = new Author($row['ma_tgia'],$row['ten_tgia'],$row['hinh_tgia']) ;
+            return $author ;
+        }
         public function getAllAuthors() {
             $stmt = $this->db->query('SELECT * FROM tacgia');
             while($row = $stmt->fetch()){
@@ -111,8 +144,6 @@
             $query = "INSERT INTO `tacgia`( `ten_tgia`,`hinh_tgia`) VALUES (:ten_tgia, :hinh_tgia)";
             $result = $this->db->prepare($query);
             $result->execute([':ten_tgia'=>$ten_tgia,':hinh_tgia'=>$hinh_tgia]);
-            return $result->rowCount();
-            
          }
          public function editAuthor($ten_tgia,$hinh_tgia,$id){
             $query = "UPDATE tacgia SET ten_tgia = :ten_tgia, hinh_tgia = :hinh_tgia WHERE ma_tgia = :id";

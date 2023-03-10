@@ -16,14 +16,24 @@ class AdminController{
         $admin = $adminService->getAdminData();
         $categories = $admin->getAllCategories();
         $authors = $admin->getAllAuthors();
+        if(isset($_POST['txttieude']) && isset($_POST['txtten_bhat']) && isset($_POST['txttomtat']) && isset($_POST['txtnoidung']) && isset($_POST['txthinhanh']) && isset($_POST['txtma_tloai']) && isset($_POST['txtma_tgia'])){
+            $admin->addArticle($_POST['txtten_bhat'], $_POST['txttieude'], $_POST['txttomtat'], $_POST['txtnoidung'] , $_POST['txthinhanh'],$_POST['txtma_tloai'], $_POST['txtma_tgia']);
+            header("Location:?controller=admin&action=article");
+        }
         include("views/admin/addArticle.php");
     }
     public function editArticle(){
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
         $article = $admin->getArticle($_GET['id']);
+        $categorySelected = $admin->getCategoryByArticleId($_GET['id']);
+        $authorSelected = $admin->getAuthorByArticleId($_GET['id']);
         $categories = $admin->getAllCategories();
         $authors = $admin->getAllAuthors();
+        if(isset($_POST['txttieude']) && isset($_POST['txtten_bhat']) && isset($_POST['txttomtat']) && isset($_POST['txtnoidung']) && isset($_POST['txthinhanh']) && isset($_POST['txtma_tloai']) && isset($_POST['txtma_tgia'])){
+            $admin->editArtilce($_POST['txtma_bviet'], $_POST['txtten_bhat'], $_POST['txttieude'], $_POST['txttomtat'], $_POST['txtnoidung'] , $_POST['txthinhanh'],$_POST['txtma_tloai'], $_POST['txtma_tgia']);
+            header("Location:?controller=admin&action=article");
+        }
         include("views/admin/editArticle.php");
     }
     public function deleteArticle(){
@@ -32,7 +42,6 @@ class AdminController{
         $admin->deleteArticle($_GET['id']);
         include("views/admin/deleteArticle.php");
     }
-
     //Category
     public function category(){
         $adminService = new AdminService();
@@ -45,16 +54,15 @@ class AdminController{
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
         if(isset($_POST['txt_ten_tloai'])){
-            $categories = $admin->createCategory($_POST['txt_ten_tloai']);
+            $admin->createCategory($_POST['txt_ten_tloai']);
         }
     }
     public function editCategory(){
-        
         $adminService = new AdminService();
         $admin = $adminService->getAdminData();
         $categories = $admin->getCategoryById($_GET['id']);
         if(isset($_POST['txt_ten_tloai'])){
-            $edit=$admin->editCategory($_POST['txt_ten_tloai'],$_GET['id']);
+            $admin->editCategory($_POST['txt_ten_tloai'],$_GET['id']);
         }
         include("views/admin/editCategory.php");
     }
@@ -63,16 +71,14 @@ class AdminController{
         $admin = $adminService->getAdminData();
         $deletedRows = $admin->deleteCategory($_GET['id']);
         if ($deletedRows > 0) {
-            header("Location: danh-sach-danh-muc.php"); // Chuyển hướng đến trang danh sách danh mục
+            header("Location:?controller=admin&action=category"); 
             exit(); // Ngăn chặn các lệnh tiếp theo được thực thi
         } else {
             echo "<script>alert('Xóa danh mục không thành công.');</script>";
         }
         include("views/admin/deleteCategory.php");
    }
-    
    //Author
-   
    public function author(){
     $adminService = new AdminService();
     $admin = $adminService->getAdminData();
@@ -83,8 +89,8 @@ public function addAuthor(){
     include("views/admin/addAuthor.php");
     $adminService = new AdminService();
     $admin = $adminService->getAdminData();
-    if(isset($_POST['txtten_tgia'])){
-        $authors = $admin->createAuthor($_POST['txtten_tgia'],$_POST['hinh_tgia']);
+    if(isset($_POST['txtten_tgia']) && isset($_POST['txthinh_tgia'])){
+        $admin->createAuthor($_POST['txtten_tgia'],$_POST['txthinh_tgia']);
     }
 }
 public function editAuthor(){
@@ -93,7 +99,7 @@ public function editAuthor(){
     $admin = $adminService->getAdminData();
     $authors = $admin->getAuthorById($_GET['id']);
     if(isset($_POST['txtten_tgia'])){
-        $edit=$admin->editAuthor($_POST['txtten_tgia'],$_POST['hinh_tgia'],$_GET['id']);
+        $admin->editAuthor($_POST['txtten_tgia'],$_POST['hinh_tgia'],$_GET['id']);
     }
     include("views/admin/editAuthor.php");
 }
@@ -102,7 +108,7 @@ public function deleteAuthor(){
     $admin = $adminService->getAdminData();
     $deletedRows = $admin->deleteAuthor($_GET['id']);
     if ($deletedRows > 0) {
-        header("Location: danh-sach-danh-muc.php"); // Chuyển hướng đến trang danh sách danh mục
+        header("Location:?controller=admin&action=author"); 
         exit(); // Ngăn chặn các lệnh tiếp theo được thực thi
     } else {
         echo "<script>alert('Xóa danh mục không thành công.');</script>";

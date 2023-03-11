@@ -1,5 +1,6 @@
 <?php
-include("configs/DBConnection.php");
+
+require_once("configs/DBConnection.php");
 include("models/Article.php");
 class ArticleService{
     public function getAllArticles(){

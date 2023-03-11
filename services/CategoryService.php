@@ -3,7 +3,7 @@ include("configs/DBConnection.php");
 include("models/Category.php");
 class CategoryService {
      private $dbConn =new DBConnection();
-     private $db=dbConn->getConnection();
+     private $db=$dbConn->getConnection();
      
      public function __construct1(){}
      

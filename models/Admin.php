@@ -2,7 +2,7 @@
     include 'Article.php';
     include 'Category.php';
     include 'Author.php';
-
+    include 'user.php';
     class Admin {
         private $articles = [];
         private $categories = [];
@@ -89,14 +89,18 @@
         }
         public function deleteCategory($id){
             $query = "DELETE FROM `theloai` WHERE `ma_tloai` = :id  ";
+            $query2 = "ALTER TABLE `theloai` AUTO_INCREMENT = 0 ";
             $result = $this->db->prepare($query);
             $result->execute([':id'=>$id]);
+            $result2 = $this->db->prepare($query2);
+            $result2->execute();
             return $result->rowCount();
          }
          public function createCategory($ten_tloai){
             $query = "INSERT INTO `theloai`( `ten_tloai`) VALUES (:ten_tloai)";
             $result = $this->db->prepare($query);
             $result->execute([':ten_tloai'=>$ten_tloai]);
+            return $result->rowCount();
          }
          public function editCategory($ten_tloai,$id){
             $query = "UPDATE `theloai` SET `ten_tloai`=:ten_tloai WHERE `ma_tloai`= :id";
@@ -154,5 +158,54 @@
         public function setAuthors($authors) {
             $this->authors = $authors;
         }
+
+
+        //==============USER=================
+        
+        public function getAllUser() {
+            $stmt = $this->db->query('SELECT * FROM `users` WHERE 1');
+            while($row = $stmt->fetch()){
+                $user = new user($row['id'],$row['UserName'],$row['Password'],$row['Role'],$row['ngayTao']);
+                array_push($this->users,$user);
+            }
+            return $this->users;
+        }
+        public function getUserbyId($id){
+            $query = "SELECT * FROM `users` WHERE `id`=:id ";
+            $result = $this->db->prepare($query);
+            $result->execute([':id'=>$id]);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $users=[];
+            $user = new user($row['id'],$row['UserName'],$row['Password'],$row['Role'],$row['ngayTao']);
+            array_push($users,$user);
+            return $users;
+        }
+        public function deleteUser($id){
+            $query = "DELETE FROM `users` WHERE `id` = :id  ";
+            $query2 = "ALTER TABLE `users` AUTO_INCREMENT = 0 ";
+            $result = $this->db->prepare($query);
+            $result->execute([':id'=>$id]);
+            $result2 = $this->db->prepare($query2);
+            $result2->execute();
+            return $result->rowCount();
+         }
+         public function createUser($Username,$Password,$Role)
+         {
+            $query = "INSERT INTO `users`(`UserName`, `Password`, `Role`) VALUES (:UserName,:Password,:Role)";
+            $result = $this->db->prepare($query);
+            $result->execute([':UserName'=>$Username,
+                              ':Password' => $Password,
+                              ':Role' => $Role]);
+            return $result->rowCount();
+         }
+         public function editUser($Username,$Password,$Role,$id){
+            $query = "UPDATE `users` SET `UserName`=:UserName,`Password`=:Password,`Role`=:Role WHERE `id`=:id";
+            $result = $this->db->prepare($query);
+            $result->execute([':UserName'=>$Username,
+            ':Password' => $Password,
+            ':Role' => $Role,
+            ':id' => $id]);
+            return $result->rowCount();
+         }
     }
 ?>

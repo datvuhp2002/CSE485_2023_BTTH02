@@ -12,6 +12,12 @@
         public function __construct(PDO $db) {
             $this->db = $db;
         }
+        // count data from all table
+        public function countRowsTable(){
+            $sql = "SELECT table_name, table_rows FROM information_schema.tables WHERE table_schema = 'btth02_cse485' AND table_name IN ('baiviet', 'tacgia', 'theloai', 'users');";
+            
+            return $this->db->query($sql)->fetchAll();
+        }
         // Article
         public function getArticles(){
             return $this->articles;
@@ -163,7 +169,7 @@
         //==============USER=================
         
         public function getAllUser() {
-            $stmt = $this->db->query('SELECT * FROM `users` WHERE 1');
+            $stmt = $this->db->query('SELECT * FROM `users`');
             while($row = $stmt->fetch()){
                 $user = new user($row['id'],$row['UserName'],$row['Password'],$row['Role'],$row['ngayTao']);
                 array_push($this->users,$user);

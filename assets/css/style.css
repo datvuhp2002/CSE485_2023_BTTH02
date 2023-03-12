@@ -71,6 +71,9 @@ img{
   content: '';
   pointer-events: none;
 }
+a:active {
+  font-weight: bold;
+}
 .card-block::before {
   transform-origin: left top;
 }

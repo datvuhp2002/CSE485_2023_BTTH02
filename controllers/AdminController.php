@@ -3,6 +3,9 @@ include("services/AdminService.php");
 class AdminController{
     // Hàm xử lý hành động index
     public function index(){
+        $adminService = new AdminService();
+        $admin = $adminService->getAdminData();
+        $data = $admin->countRowsTable();
         include("views/admin/index.php");
     }
     public function article(){

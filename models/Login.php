@@ -9,7 +9,6 @@ class Login {
         $this->Password = $Password;
         $this->Role = $Role;
     }
-''
     public function SetUserName($UserName) {
         $this->UserName = $UserName;
     }

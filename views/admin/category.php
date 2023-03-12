@@ -34,3 +34,4 @@
             </div>
         </div>
     </main>
+<?php include APP_ROOT . '/includes/footer.php'?>

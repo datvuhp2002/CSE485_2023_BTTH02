@@ -2,7 +2,7 @@
     <h3 class="text-center text-uppercase mb-4 text-black">TOP bài hát yêu thích</h3>
     <div class="row">
         <?php foreach($articles as $article): ?>
-            <a href="index.php?controller=detail&action=index&id=<?= $article->getMaBViet() ?>" class="text-decoration-none col-md-3 col-sm-6text-black">
+            <a href="index.php?controller=detail&action=index&id=<?= $article->getMaBViet() ?>" class="text-decoration-none col-md-3 col-sm-6 text-black">
                 <div class="card card-block">
                     <div class="p-3">
                         <img src="<?= so . '/assets/images/songs/' . $article->getHinhAnh().'.jpg' ?>" class="card-img-top">
